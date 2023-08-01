@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PreEntrega3+Mesa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100;300;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link href="./css/estilos.css" rel="stylesheet">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="./js/presets.js"></script>
+    <script defer src="./js/index.js"></script>
+</head>
+<body>
+    <h1>Cotizador de tortas</h1>
+    <hr>
+    <div class="container text-left">
+        <div class="row">
+          <div class="col">
+            
+            <form id="formCotizador" class="needs-validation" novalidate>
+                <fieldset > <!-- disabled -->
+                    <div class="mb-3">
+                        <label for="selectTipoBizcocho" class="form-label">Selecciona el tipo de bizcocho</label>
+                        <select class="form-select" id="selectTipoBizcocho" aria-label="Selecciona el tipo de bizcocho" required>
+                            <option selected disabled value="">Selecciona una opcion</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="selectRelleno" class="form-label">Selecciona el relleno</label>
+                        <select class="form-select" id="selectRelleno" aria-label="Selecciona el relleno" required>
+                            <option selected disabled value="">Selecciona una opcion</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="selectCobertura" class="form-label">Selecciona la cobertura</label>
+                        <select class="form-select" id="selectCobertura" aria-label="Selecciona la cobertura" required>
+                            <option selected disabled value="">Selecciona una opcion</option>
+                        </select>
+                    </div>
+                      
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="checkDecoracion">
+                        <label class="form-check-label" for="checkDecoracion">Incluye Decoración</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnCalcular">Calcular</button>
+                </fieldset>
+                
+              </form>
+
+
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  <h5 class="card-title">Presupuesto detallado</h5>
+                  <p class="card-text">Cada item seleccionado en nuestro cotizador impactará directamente en el precio de su torta.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Bizcocho</h6>
+                            <small id="detalleBizcocho" class="text-body-secondary"></small>
+                        </div>
+                        <span id="precioBizcocho" class="text-body-secondary">$0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Relleno</h6>
+                            <small id="detalleRelleno" class="text-body-secondary"></small>
+                        </div>
+                        <span id="precioRelleno" class="text-body-secondary">$0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Cobertura</h6>
+                            <small id="detalleCobertura" class="text-body-secondary"></small>
+                        </div>
+                        <span id="precioCobertura" class="text-body-secondary">$0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Decoración</h6>
+                            <small id="detalleDecoracion" class="text-body-secondary">Si</small>
+                        </div>
+                        <span id="precioDecoracion" class="text-body-secondary">$0</span>
+                    </li>
+                    <li class="list-group-item text-bg-dark d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0 bold">Total</h6>
+                        </div>
+                        <span id="precioTotal" class="text-body-primary">$0</span>
+                    </li>
+                </ul>
+                <div class="card-footer text-end">
+                    <div><button type="button" class="btn btn-danger" id="btnLimpiar">Limpiar</button>
+                    <button type="button" class="btn btn-primary" id="btnVer" data-bs-toggle="modal" data-bs-target="#cotizacionesGuardadas">Ver</button></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal -->
+<div class="modal fade" id="cotizacionesGuardadas" tabindex="-1" aria-labelledby="cotizacionesGuardadasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="cotizacionesGuardadasLabel">Cotizaciones previas</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cotizacionePreviasBody">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
